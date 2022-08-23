@@ -20,7 +20,7 @@
     font-weight: 600;
 }
 
-.filter-characters-item select {
+.filter-characters-item select, .filter-characters-item input {
     width: 150px;
     padding-right: 8px;
     padding-left: 8px;

@@ -1,27 +1,28 @@
-import { useEffect, useState } from "react";
-import {useRecoilState} from "recoil";
+import { Suspense, useEffect, useState } from "react";
+import {useRecoilState, useRecoilValue} from "recoil";
 import { FilterAtom } from "../../recoil/atom/filter.atom";
+import { CharactersSelector } from "../../recoil/selector/characters.selector";
 import "./filter-characters.css"
 
 export const FilterCharacters = () => {
 
     const [filtro, setFiltro] = useRecoilState(FilterAtom);
+    const [namesCharacters, setNameCharacters] = useState([]);
 
     const filterCharacters = (e) => {
-        console.log(e.target.id);
-        console.log(e.target.value);
-        setFiltro({...filtro, [e.target.id] : e.target.value.toLowerCase()});
+        let value  = e.target.value;
+        if (e.target.nodeName === "SELECT"){
+            value = value === "Select" ? null : value.toLowerCase()
+        }
+
+        setFiltro({...filtro, [e.target.id] : value});
     }
-
-    useEffect(() => {
-        console.log(filtro);
-
-    }, [filtro]);
 
     return <div className="filter-characters">
         <div className="filter-characters-item">
             <span>Status</span>
             <select id="status" onChange={e => filterCharacters(e)} >
+                <option>Select</option>
                 <option>Alive</option>
                 <option>Dead</option>
                 <option>Unknown</option>
@@ -30,6 +31,7 @@ export const FilterCharacters = () => {
         <div className="filter-characters-item">
             <span>Species</span>
             <select id="species" onChange={e => filterCharacters(e)} >
+                <option>Select</option>
                 <option>Human</option>
                 <option>Alien</option>
             </select>
@@ -37,17 +39,16 @@ export const FilterCharacters = () => {
         <div className="filter-characters-item">
             <span>Gender</span>
             <select id="gender" onChange={e => filterCharacters(e)} >
+                <option>Select</option>
                 <option>Female</option>
                 <option>Male</option>
                 <option>Genderless</option>
                 <option>Unknown</option>
-            </select>
+            </select> 
         </div>
         <div className="filter-characters-item">
             <span>Name</span>
-            <datalist>
-                
-            </datalist>
+            <input id="name" placeholder="name" onChange={e => filterCharacters(e)}/>
         </div>
 
     </div>

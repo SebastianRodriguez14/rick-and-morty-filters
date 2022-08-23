@@ -6,6 +6,7 @@ export const FilterAtom = atom({
     default: {
         "status": null,
         "species": null,
-        "gender": null
+        "gender": null,
+        "name": null
     }
 })

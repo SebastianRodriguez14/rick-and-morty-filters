@@ -7,7 +7,7 @@ import { Loader } from './components/utils/loader'
 function App() {
   return (
     <div className="container">
-      <FilterCharacters/>
+      <FilterCharacters loading={false}/>
       <Suspense fallback={<Loader/>}>
         <IndexCharacter/>
       </Suspense>

@@ -24,15 +24,20 @@ export const CharactersSelector = selector({
         filter[prop] ? filtersString.push(`${prop}=${filter[prop]}`) : null;
       }
 
-      characters = await (await fetch(`${urlBase}/character/?${filtersString.join("&")}`)).json();
-      characters = characters.results;
-
-      if (!characters){
+      characters = await fetch(`${urlBase}/character/?${filtersString.join("&")}`);
+      console.log(characters);
+      if (characters.status !== 200){
         characters = [];
+      } else{
+          characters = await characters.json();
+          if (!characters){
+            characters = [];
+          } else {
+            characters = characters.results;
+          }
       }
 
     }
-    console.log(characters);
     return characters;
   },
 });
