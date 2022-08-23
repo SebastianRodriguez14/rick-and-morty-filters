@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react"
+import { urlBase } from "../hooks/url";
 import { Character } from "./character";
+import { useRecoilState, useRecoilValue } from "recoil"
 import "./characters.css";
+import { CharactersAtom } from "../../recoil/atom/characters.atom";
+import { CharactersSelector } from "../../recoil/selector/characters.selector";
 
 export const IndexCharacter = () => {
 
-    const [characters, setCharacters] = useState([]);
+    const [characters, setCharacters] = useRecoilState(CharactersAtom);
+    const charactersSelector = useRecoilValue(CharactersSelector);
     
     const getCharacters = async () => {
         
-        const chr = await (await fetch("https://rickandmortyapi.com/api/character")).json();
-        console.log(chr);
+        const chr = await (await fetch(`${urlBase}/character`)).json();
         setCharacters(chr.results);
     }
 
@@ -18,16 +22,13 @@ export const IndexCharacter = () => {
     }, [])
 
 
-    return <>
-    <div className="container-characters">
+    return <div className="container-characters">
         {
-            characters.map(character => {
+            charactersSelector.map(character => {
                 return <Character key={character.id} character={character}/>
                 
             })
         }
     </div>
-        
-    </>
 }
 

@@ -17,7 +17,7 @@
 }
 
 .character{
-    background-color: #415A77;
+    background-color: var(--color-secondary);
     border-radius: 1rem;
     overflow: hidden;
 }
@@ -31,7 +31,7 @@
 }
 
 .character-name{
-    color: white;
+    color: var(--color-primary-text);
     font-size: 2.5rem;
     font-weight: 600;
     display: block;
@@ -50,7 +50,7 @@
 .character-description-item{
     margin: 0.3rem 2rem;
     display: flex;
-    color: rgb(209, 209, 209);
+    color: var(--color-secondary-text);
     font-size: 20px;
     flex-direction: row;
     justify-content: space-between;
