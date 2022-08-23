@@ -5,6 +5,9 @@
     display: flex;
     justify-content: space-between;
     border-radius: 1rem;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-items: center;
 }
 
 .filter-characters-item{
