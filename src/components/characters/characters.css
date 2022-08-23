@@ -67,3 +67,12 @@
 .container-characters{
     column-width: 300px;
 }
+
+.no-characters{
+    color: var(--color-primary-text);
+    width: 100%;
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-top: 2rem;
+}

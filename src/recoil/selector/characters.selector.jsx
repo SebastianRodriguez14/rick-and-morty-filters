@@ -26,6 +26,11 @@ export const CharactersSelector = selector({
 
       characters = await (await fetch(`${urlBase}/character/?${filtersString.join("&")}`)).json();
       characters = characters.results;
+
+      if (!characters){
+        characters = [];
+      }
+
     }
     console.log(characters);
     return characters;
