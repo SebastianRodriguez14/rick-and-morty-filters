@@ -3,7 +3,6 @@
 }
 
 .container-character{
-    padding: 0.6rem 0rem;
     transition-property: all;
     transition-duration: 1s ;
 }
@@ -65,7 +64,10 @@
 }
 
 .container-characters{
-    column-width: 300px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 12px;
+    justify-content: space-between;
 }
 
 .no-characters{

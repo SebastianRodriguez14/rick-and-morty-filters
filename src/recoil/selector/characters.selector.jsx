@@ -9,35 +9,32 @@ export const CharactersSelector = selector({
     let characters = get(CharactersAtom);
     const filter = get(FilterAtom);
 
-    let existFilter = false;
-    for (const prop in filter) {
-      if (filter[prop]) {
-        existFilter = true;
-        break;
-      }
-    }
-
-    if (existFilter) {
+    if (checkExistFilter(filter)) {
       const filtersString = [];
 
       for (const prop in filter) {
         filter[prop] ? filtersString.push(`${prop}=${filter[prop]}`) : null;
       }
 
-      characters = await fetch(`${urlBase}/character/?${filtersString.join("&")}`);
+      characters = await fetch(
+        `${urlBase}/character/?${filtersString.join("&")}`
+      );
       console.log(characters);
-      if (characters.status !== 200){
-        characters = [];
-      } else{
-          characters = await characters.json();
-          if (!characters){
-            characters = [];
-          } else {
-            characters = characters.results;
-          }
-      }
 
+      characters =
+        characters.status === 200 ? (await characters.json()).results : [];
     }
     return characters;
   },
 });
+
+const checkExistFilter = (filter) => {
+  let existFilter = false;
+  for (const prop in filter) {
+    if (filter[prop]) {
+      existFilter = true;
+      break;
+    }
+  }
+  return existFilter;
+};
